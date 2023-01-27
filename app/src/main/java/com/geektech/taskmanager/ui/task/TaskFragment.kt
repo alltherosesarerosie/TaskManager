@@ -15,13 +15,13 @@ import com.geektech.taskmanager.databinding.FragmentTaskBinding
 
 class TaskFragment : Fragment() {
     private lateinit var
-            binding:FragmentTaskBinding
+            binding: FragmentTaskBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding=FragmentTaskBinding.inflate(inflater, container, false)
+        binding = FragmentTaskBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -30,26 +30,17 @@ class TaskFragment : Fragment() {
         binding.btnSave.setOnClickListener {
             App.db.taskDao().insertAll(
                 Task(
-
-                    title = binding.etTitle.text.toString(),
-                    desc = binding.etDesk.text.toString(),
-
-
+                    title = binding.etTitle.text.toString(), desc = binding.etDesk.text.toString(),
                 )
             )
-
             findNavController().navigateUp()
         }
         getClick()
     }
 
-    companion object{
-        const val RESULT_TASK = "result.task"
-    }
-
-    fun getClick(){
-        val title= arguments?.getString("title")
-        val desk= arguments?.getString("desc")
+    private fun getClick() {
+        val title = arguments?.getString("title")
+        val desk = arguments?.getString("desc")
         binding.etTitle.setText(title)
         binding.etDesk.setText(desk)
     }

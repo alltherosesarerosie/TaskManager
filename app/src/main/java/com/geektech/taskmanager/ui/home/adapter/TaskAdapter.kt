@@ -7,12 +7,12 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.geektech.taskmanager.model.Task
 import com.geektech.taskmanager.databinding.ItemTaskBinding
 
-class TaskAdapter: Adapter<TaskAdapter.TaskViewHolder>() {
-    var onLongClick: ((Task)-> Unit)?=null
-    var onClick: ((Task)-> Unit)?=null
+class TaskAdapter : Adapter<TaskAdapter.TaskViewHolder>() {
+    var onLongClick: ((Task) -> Unit)? = null
+    var onClick: ((Task) -> Unit)? = null
     private var data = arrayListOf<Task>()
-/*
 
+/*
     fun addTask(task: Task){
         data.add(0,task)
         notifyItemChanged(0)
@@ -20,16 +20,18 @@ class TaskAdapter: Adapter<TaskAdapter.TaskViewHolder>() {
     }
 */
 
-    fun addTask(list: List<Task>){
-       data = list as ArrayList<Task>
+    fun addTask(list: List<Task>) {
+        data = list as ArrayList<Task>
+        notifyDataSetChanged()
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         return TaskViewHolder(
             ItemTaskBinding.inflate(
                 LayoutInflater.from(parent.context),
-                parent, false))
+                parent, false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
@@ -37,20 +39,18 @@ class TaskAdapter: Adapter<TaskAdapter.TaskViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return  data.size
+        return data.size
     }
 
-
-    inner class TaskViewHolder(private val binding: ItemTaskBinding): ViewHolder(binding.root){
+    inner class TaskViewHolder(private val binding: ItemTaskBinding) : ViewHolder(binding.root) {
         fun bind(task: Task) {
-            binding.tvTitle.text= task.title
-            binding.tvDesc.text=task.desc
-            itemView.setOnLongClickListener{
+            binding.tvTitle.text = task.title
+            binding.tvDesc.text = task.desc
+            itemView.setOnLongClickListener {
                 onLongClick?.invoke(task)
                 return@setOnLongClickListener true
             }
-
-            itemView.setOnClickListener{
+            itemView.setOnClickListener {
                 onClick?.invoke(task)
 
             }

@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "task")
 data class Task(
     @PrimaryKey(autoGenerate = true)
-    var id:Int= 0,
-    var title:String?=null,
-    var desc:String?=null
-):java.io.Serializable
+    var id: Int? = null,
+    var title: String? = null,
+    var desc: String? = null
+) : java.io.Serializable

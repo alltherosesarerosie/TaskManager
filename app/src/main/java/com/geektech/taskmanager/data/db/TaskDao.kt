@@ -2,6 +2,7 @@ package com.geektech.taskmanager.data.db
 
 import androidx.room.*
 import com.geektech.taskmanager.model.Task
+
 @Dao
 interface TaskDao {
     @Query("SELECT * FROM task")

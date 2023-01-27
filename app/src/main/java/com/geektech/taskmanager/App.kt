@@ -5,17 +5,18 @@ import androidx.room.Room
 import com.geektech.taskmanager.data.db.AppDatabase
 import com.geektech.taskmanager.data.db.TaskDao
 
-class App: Application() {
-    companion object{
+class App : Application() {
+    companion object {
         lateinit var db: AppDatabase
     }
+
     override fun onCreate() {
         super.onCreate()
-         db = Room.databaseBuilder(
+        db = Room.databaseBuilder(
             applicationContext,
-             AppDatabase::class.java, "database-name"
+            AppDatabase::class.java, "database-name"
         ).allowMainThreadQueries()
-             .build()
+            .build()
 
     }
 

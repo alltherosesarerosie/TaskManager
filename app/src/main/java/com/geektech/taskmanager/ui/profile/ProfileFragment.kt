@@ -16,12 +16,8 @@ import java.io.File
 
 
 class ProfileFragment : Fragment() {
-    private lateinit var binding:FragmentProfileBinding
+    private lateinit var binding: FragmentProfileBinding
     private lateinit var pref: Pref
-
-
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,9 +35,5 @@ class ProfileFragment : Fragment() {
             pref.saveName(binding.etName.text.toString())
             findNavController().navigateUp()
         }
-
     }
-
-
-
 }

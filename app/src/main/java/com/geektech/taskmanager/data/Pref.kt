@@ -4,45 +4,27 @@ import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 
-
 class Pref(private val context: Context) {
-    private  val pref = context.getSharedPreferences(PREF_NAME,  MODE_PRIVATE)
+    private val pref = context.getSharedPreferences(PREF_NAME, MODE_PRIVATE)
     private lateinit var name: String
 
-
-    fun isUserSeen():Boolean{
+    fun isUserSeen(): Boolean {
         return pref.getBoolean(SEEN_KEY, false)
     }
 
-    fun saveSeen(){
+    fun saveSeen() {
         pref.edit().putBoolean(SEEN_KEY, true).apply()
     }
 
-    fun saveName(name: String){
+    fun saveName(name: String) {
         pref.edit().putString(NAME_KEY, name).apply()
     }
 
-    fun getName():String{
-        return pref.getString(NAME_KEY,"hellor").toString()
+    fun getName(): String {
+        return pref.getString(NAME_KEY, "hellor").toString()
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    companion object{
+    companion object {
         const val PREF_NAME = "Task.pref"
         const val SEEN_KEY = "seen.key"
         const val NAME_KEY = "name.key"
