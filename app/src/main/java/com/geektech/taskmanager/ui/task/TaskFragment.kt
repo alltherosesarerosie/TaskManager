@@ -5,12 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
-import com.geektech.taskmanager.R
-import com.geektech.taskmanager.Task
+import com.geektech.taskmanager.App
+import com.geektech.taskmanager.model.Task
 import com.geektech.taskmanager.databinding.FragmentTaskBinding
 
 
@@ -29,16 +28,30 @@ class TaskFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btnSave.setOnClickListener {
-            setFragmentResult(RESULT_TASK, bundleOf("task" to
-                    Task(binding.etTitle.text.toString(),
-                        binding.etDesk.text.toString())))
+            App.db.taskDao().insertAll(
+                Task(
+
+                    title = binding.etTitle.text.toString(),
+                    desc = binding.etDesk.text.toString(),
+
+
+                )
+            )
+
             findNavController().navigateUp()
         }
+        getClick()
     }
 
     companion object{
         const val RESULT_TASK = "result.task"
     }
 
+    fun getClick(){
+        val title= arguments?.getString("title")
+        val desk= arguments?.getString("desc")
+        binding.etTitle.setText(title)
+        binding.etDesk.setText(desk)
+    }
 
 }

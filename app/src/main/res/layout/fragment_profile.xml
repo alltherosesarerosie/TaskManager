@@ -23,10 +23,22 @@
     </androidx.cardview.widget.CardView>
 
     <EditText
+        android:id="@+id/et_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:hint="@string/profile"/>
+
+    <Button
+        android:id="@+id/save_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:textAllCaps="false"
+
+        />
 
 
 </LinearLayout>
