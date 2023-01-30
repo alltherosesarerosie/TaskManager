@@ -22,12 +22,29 @@
             android:scaleType="centerCrop"/>
     </androidx.cardview.widget.CardView>
 
-    <EditText
-        android:id="@+id/et_name"
+
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:hint="@string/profile"/>
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:boxBackgroundMode="outline"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:boxCornerRadiusTopEnd="16dp"
+        app:boxCornerRadiusTopStart="16dp"
+        app:boxCornerRadiusBottomStart="16dp"
+        app:boxCornerRadiusBottomEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/your_name" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <Button
         android:id="@+id/save_name"
@@ -35,10 +52,6 @@
         android:layout_height="wrap_content"
         android:text="@string/save"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:textAllCaps="false"
-
-        />
-
-
+        android:layout_marginTop="20dp"
+        android:textAllCaps="false"/>
 </LinearLayout>

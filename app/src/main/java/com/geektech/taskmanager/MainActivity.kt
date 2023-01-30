@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
 
+
         if (!pref.isUserSeen())
             navController.navigate(R.id.onBoardingFragment)
 
@@ -49,7 +50,7 @@ class MainActivity : AppCompatActivity() {
             R.id.navigation_dashboard,
             R.id.navigation_notifications
         )
-        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+        navController.addOnDestinationChangedListener {controller, destination, arguments ->
             navView.isVisible = bottomNavFragments.contains(destination.id)
             if (destination.id == R.id.onBoardingFragment) {
                 supportActionBar?.hide()

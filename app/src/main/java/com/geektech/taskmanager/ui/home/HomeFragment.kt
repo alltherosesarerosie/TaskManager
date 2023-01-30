@@ -58,8 +58,9 @@ class HomeFragment : Fragment() {
                 ).show()
                 App.db.taskDao().delete(it)
                 setData()
-                showToast("Successfully deleted!")
+
             }
+            showToast("Successfully deleted!")
             builder.setNegativeButton(android.R.string.no) { dialog, which ->
                 Toast.makeText(
                     requireContext(),

@@ -30,7 +30,7 @@ class TaskFragment : Fragment() {
         binding.btnSave.setOnClickListener {
             App.db.taskDao().insertAll(
                 Task(
-                    title = binding.etTitle.text.toString(), desc = binding.etDesk.text.toString(),
+                    title = binding.etTitle.text.toString(), desc = binding.etDesc.text.toString(),
                 )
             )
             findNavController().navigateUp()
@@ -42,7 +42,7 @@ class TaskFragment : Fragment() {
         val title = arguments?.getString("title")
         val desk = arguments?.getString("desc")
         binding.etTitle.setText(title)
-        binding.etDesk.setText(desk)
+        binding.etDesc.setText(desk)
     }
 
 }

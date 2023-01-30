@@ -15,15 +15,15 @@ class OnBoardingAdapter(private val onClick: () -> Unit) :
     Adapter<OnBoardingAdapter.OnBoardingViewHolder>() {
     private val data = arrayListOf(
         OnBoard(
-            "Mentored by professional", "Guided by people who professional, will add more" +
-                    " knowledge ", "https://cdn-icons-png.flaticon.com/512/9186/9186499.png"
+            "Manage Your Task", "Organize your tasks easily and quickly" +
+                    " knowledge ", "https://assets4.lottiefiles.com/packages/lf20_3vc9btr6.json"
         ), OnBoard(
-            "Practice everywhere",
+            "Work On Time",
             "Do not think that learning can be done at school",
-            "https://cdn-icons-png.flaticon.com/512/4334/4334822.png"
+            "https://assets4.lottiefiles.com/packages/lf20_gjsy1lag.json"
         ), OnBoard(
-            "Mentored by professional", "Guided by people who professional, will add more" +
-                    " knowledge ", "https://cdn-icons-png.flaticon.com/512/9186/9186499.png"
+            "Get Reminder on Time", "Guided by people who professional, will add more" +
+                    " knowledge ", "https://assets6.lottiefiles.com/packages/lf20_qy2hc1lc.json"
         )
     )
 
@@ -49,7 +49,9 @@ class OnBoardingAdapter(private val onClick: () -> Unit) :
         fun bind(onBoard: OnBoard) {
             binding.tvTitle.text = onBoard.title
             binding.tvDesc.text = onBoard.desc
-            binding.ivImg.loadImage(onBoard.img.toString())
+            binding.lottie.setAnimationFromUrl(onBoard.img.toString())
+//          load image
+//            binding.ivImg.loadImage(onBoard.img.toString())
             binding.btn.isVisible = adapterPosition == data.lastIndex
             binding.btn.setOnClickListener {
                 onClick()
