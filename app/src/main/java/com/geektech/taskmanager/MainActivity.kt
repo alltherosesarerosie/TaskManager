@@ -29,8 +29,9 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
 
 
-        if (!pref.isUserSeen())
-            navController.navigate(R.id.onBoardingFragment)
+        navController.navigate(R.id.onBoardingFragment)
+//        if (!pref.isUserSeen())
+//            navController.navigate(R.id.onBoardingFragment)
 
         val appBarConfiguration = AppBarConfiguration(
             setOf(

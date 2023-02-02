@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.geektech.taskmanager.R
 import com.geektech.taskmanager.databinding.FragmentOnBoardingBinding
 import com.geektech.taskmanager.databinding.ItemOnboardingBinding
 import com.geektech.taskmanager.model.OnBoard
@@ -16,14 +17,14 @@ class OnBoardingAdapter(private val onClick: () -> Unit) :
     private val data = arrayListOf(
         OnBoard(
             "Manage Your Task", "Organize your tasks easily and quickly" +
-                    " knowledge ", "https://assets4.lottiefiles.com/packages/lf20_3vc9btr6.json"
+                    " knowledge ", R.raw.writing
         ), OnBoard(
             "Work On Time",
             "Do not think that learning can be done at school",
-            "https://assets4.lottiefiles.com/packages/lf20_gjsy1lag.json"
+            R.raw.time
         ), OnBoard(
             "Get Reminder on Time", "Guided by people who professional, will add more" +
-                    " knowledge ", "https://assets6.lottiefiles.com/packages/lf20_qy2hc1lc.json"
+                    " knowledge ", R.raw.time2
         )
     )
 
@@ -49,7 +50,8 @@ class OnBoardingAdapter(private val onClick: () -> Unit) :
         fun bind(onBoard: OnBoard) {
             binding.tvTitle.text = onBoard.title
             binding.tvDesc.text = onBoard.desc
-            binding.lottie.setAnimationFromUrl(onBoard.img.toString())
+            onBoard.img?.let { binding.lottie.setAnimation(it) }
+
 //          load image
 //            binding.ivImg.loadImage(onBoard.img.toString())
             binding.btn.isVisible = adapterPosition == data.lastIndex

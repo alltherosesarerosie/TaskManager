@@ -27,8 +27,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_url="https://assets4.lottiefiles.com/packages/lf20_bnxoocv2.json" />
+        app:lottie_loop="true" />
 
     <TextView
         android:id="@+id/tv_title"
