@@ -10,4 +10,8 @@
     <string name="save">Save</string>
     <string name="profile">Profile</string>
     <string name="your_name">Your name</string>
+    <string name="input_phone_number">Input phone number</string>
+    <string name="send_sms">Send SMS</string>
+    <string name="send_code">Send code</string>
+    <string name="enter_a_code">Enter a code</string>
 </resources>

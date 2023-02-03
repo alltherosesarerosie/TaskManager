@@ -12,26 +12,30 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.geektech.taskmanager.data.Pref
 import com.geektech.taskmanager.databinding.ActivityMainBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var pref: Pref
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        auth = FirebaseAuth.getInstance()
 
         pref = Pref(this)
         val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
 
+        if (!pref.isUserSeen())
+            navController.navigate(R.id.onBoardingFragment)
 
-        navController.navigate(R.id.onBoardingFragment)
-//        if (!pref.isUserSeen())
-//            navController.navigate(R.id.onBoardingFragment)
+        if (auth.currentUser == null) {
+            navController.navigate(R.id.authFragment)
+        }
 
         val appBarConfiguration = AppBarConfiguration(
             setOf(
@@ -39,7 +43,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_dashboard,
                 R.id.navigation_notifications,
                 R.id.navigation_profile,
-                R.id.taskFragment
+                R.id.taskFragment,
+                R.id.authFragment,
+                R.id.acceptFragment
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -51,7 +57,7 @@ class MainActivity : AppCompatActivity() {
             R.id.navigation_dashboard,
             R.id.navigation_notifications
         )
-        navController.addOnDestinationChangedListener {controller, destination, arguments ->
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
             navView.isVisible = bottomNavFragments.contains(destination.id)
             if (destination.id == R.id.onBoardingFragment) {
                 supportActionBar?.hide()
