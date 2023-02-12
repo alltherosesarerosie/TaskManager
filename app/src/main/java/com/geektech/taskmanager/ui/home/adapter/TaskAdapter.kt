@@ -7,9 +7,8 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.geektech.taskmanager.model.Task
 import com.geektech.taskmanager.databinding.ItemTaskBinding
 
-class TaskAdapter : Adapter<TaskAdapter.TaskViewHolder>() {
+class TaskAdapter(private val onClick:(Task)->Unit) : Adapter<TaskAdapter.TaskViewHolder>() {
     var onLongClick: ((Task) -> Unit)? = null
-    var onClick: ((Task) -> Unit)? = null
     private var data = arrayListOf<Task>()
 
 /*
@@ -44,17 +43,16 @@ class TaskAdapter : Adapter<TaskAdapter.TaskViewHolder>() {
 
     inner class TaskViewHolder(private val binding: ItemTaskBinding) : ViewHolder(binding.root) {
         fun bind(task: Task) {
+            itemView.setOnClickListener {
+                onClick(task)
+            }
             binding.tvTitle.text = task.title
             binding.tvDesc.text = task.desc
             itemView.setOnLongClickListener {
                 onLongClick?.invoke(task)
                 return@setOnLongClickListener true
             }
-            itemView.setOnClickListener {
-                onClick?.invoke(task)
 
-            }
         }
     }
-
 }

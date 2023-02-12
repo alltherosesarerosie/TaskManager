@@ -14,4 +14,7 @@
     <string name="send_sms">Send SMS</string>
     <string name="send_code">Send code</string>
     <string name="enter_a_code">Enter a code</string>
+    <string name="hello_world">Hello World</string>
+    <string name="exit">Exit</string>
+    <string name="update">Update</string>
 </resources>

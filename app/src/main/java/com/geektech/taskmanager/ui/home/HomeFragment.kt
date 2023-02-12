@@ -3,6 +3,7 @@ package com.geektech.taskmanager.ui.home
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,18 +18,23 @@ import com.geektech.taskmanager.model.Task
 import com.geektech.taskmanager.databinding.FragmentHomeBinding
 import com.geektech.taskmanager.ui.home.adapter.TaskAdapter
 import com.geektech.taskmanager.ui.task.TaskFragment
+import com.geektech.taskmanager.utils.isOnline
 import com.geektech.taskmanager.utils.showToast
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private lateinit var adapter: TaskAdapter
+    private val db = Firebase.firestore
 
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        adapter = TaskAdapter()
+        adapter = TaskAdapter(this::onClick)
     }
 
     override fun onCreateView(
@@ -42,8 +48,28 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (requireContext().isOnline()) {
+            getTasks()
+        } else {
+            setData()
+        }
         initAdapter()
         onLongClick()
+    }
+
+    private fun getTasks() {
+        val uid = FirebaseAuth.getInstance().currentUser?.uid
+        if (uid != null) {
+            db.collection(uid).get().addOnSuccessListener {
+                val data = it.toObjects(Task::class.java)
+                adapter.addTask(data)
+            }.addOnFailureListener {
+            }
+        }
+    }
+
+    private fun onClick(task: Task) {
+        findNavController().navigate(HomeFragmentDirections.actionNavigationHomeToTaskFragment(task))
     }
 
     private fun onLongClick() {
@@ -56,11 +82,10 @@ class HomeFragment : Fragment() {
                     requireContext(),
                     android.R.string.yes, Toast.LENGTH_SHORT
                 ).show()
+                showToast("Successfully deleted!")
                 App.db.taskDao().delete(it)
                 setData()
-
             }
-            showToast("Successfully deleted!")
             builder.setNegativeButton(android.R.string.no) { dialog, which ->
                 Toast.makeText(
                     requireContext(),
@@ -72,7 +97,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        setData()
         binding.recycleView.adapter = adapter
         binding.fab.setOnClickListener {
             findNavController().navigate(R.id.taskFragment)

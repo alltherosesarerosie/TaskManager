@@ -14,6 +14,6 @@ interface TaskDao {
     @Delete
     fun delete(task: Task)
 
-    @Update
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     fun update(task: Task)
 }

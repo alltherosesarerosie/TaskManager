@@ -1,6 +1,7 @@
 package com.geektech.taskmanager
 
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -13,9 +14,9 @@ import androidx.navigation.ui.setupWithNavController
 import com.geektech.taskmanager.data.Pref
 import com.geektech.taskmanager.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.messaging.FirebaseMessaging
 
 class MainActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityMainBinding
     private lateinit var pref: Pref
     private lateinit var auth: FirebaseAuth
@@ -27,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
         pref = Pref(this)
+
         val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
 
@@ -36,7 +38,6 @@ class MainActivity : AppCompatActivity() {
         if (auth.currentUser == null) {
             navController.navigate(R.id.authFragment)
         }
-
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_home,
@@ -48,6 +49,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.acceptFragment
             )
         )
+
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 

@@ -9,14 +9,17 @@
         android:id="@+id/navigation_home"
         android:name="com.geektech.taskmanager.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_taskFragment"
+            app:destination="@id/taskFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.geektech.taskmanager.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
-
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.geektech.taskmanager.ui.notifications.NotificationsFragment"
@@ -26,7 +29,14 @@
         android:id="@+id/taskFragment"
         android:name="com.geektech.taskmanager.ui.task.TaskFragment"
         android:label="Task"
-        tools:layout="@layout/fragment_task" />
+        tools:layout="@layout/fragment_task" >
+        <argument
+            android:name="task"
+            android:defaultValue="@null"
+            app:nullable="true"
+            app:argType="com.geektech.taskmanager.model.Task"
+            />
+    </fragment>
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.geektech.taskmanager.ui.profile.ProfileFragment"
@@ -45,18 +55,12 @@
         <argument
             android:name="verId"
             app:argType="string" />
-        <action
-            android:id="@+id/action_acceptFragment_to_navigation_home"
-            app:destination="@id/navigation_home" />
-
     </fragment>
-
     <fragment
         android:id="@+id/authFragment"
         android:name="com.geektech.taskmanager.ui.auth.AuthFragment"
         android:label="Authentication"
         tools:layout="@layout/fragment_auth">
-
         <action
             android:id="@+id/action_authFragment_to_acceptFragment"
             app:destination="@id/acceptFragment" />

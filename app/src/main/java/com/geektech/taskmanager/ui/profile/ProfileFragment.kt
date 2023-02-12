@@ -10,14 +10,17 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.geektech.taskmanager.R
 import com.geektech.taskmanager.data.Pref
 import com.geektech.taskmanager.databinding.FragmentProfileBinding
+import com.google.firebase.auth.FirebaseAuth
 import java.io.File
 
 
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private lateinit var pref: Pref
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +37,12 @@ class ProfileFragment : Fragment() {
         binding.saveName.setOnClickListener {
             pref.saveName(binding.etName.text.toString())
             findNavController().navigateUp()
+        }
+        auth = FirebaseAuth.getInstance()
+        binding.exit.setOnClickListener {
+            auth.signOut()
+            findNavController().navigate(R.id.authFragment)
+
         }
     }
 }

@@ -38,12 +38,11 @@ class AcceptFragment : Fragment() {
             code = binding.etCode.text.toString()
             val credential = PhoneAuthProvider.getCredential(args.verId, code)
             signInWithPhoneAuthCredential(credential)
-            findNavController().navigate(AcceptFragmentDirections.actionAcceptFragmentToNavigationHome())
+//            findNavController().navigate(AcceptFragmentDirections.actionAcceptFragmentToNavigationHome())
         }
     }
 
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
-
         auth.signInWithCredential(credential)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
